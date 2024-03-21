@@ -1,0 +1,71 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{fullpage}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{cleveref}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{url}
+%\usepackage{listings}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+% \usepackage{algorithm}
+% \usepackage{algorithmic}
+%\usepackage{alltt}
+\usepackage{verbatim}
+% \usepackage{cite}
+%\usepackage{tikz}
+\usepackage{subfig}
+%\usepackage{courier}
+%\usepackage{upquote}
+%\usepackage{minibox}
+\usepackage{booktabs}
+%\usepackage{epstopdf}
+%\usepackage{mathptmx}
+\usepackage{natbib}
+
+% \graphicspath{{../figures/}}
+
+
+\begin{document}
+\begin{center}
+\textbf{Checklist for Numerical Experiments}\\
+% \textit{21/3/2024}\\
+\vspace{\baselineskip}
+Kuan Fans
+\end{center}
+
+As numerical experimenters, we all know that there is a gap between perfect math theory and 'disgusting' numerical implementations. Sometimes the differences are so small that no special attentions are needed. However, it is not a surprise that experiments are inconsistent with the theory. You may wonder whether the theory fails or some unperceived mistakes in your codes are making trouble. If you're sure that there is no fault in the theory, this is a checklist you may resort to once such uncomfortable things happen and it would save you a lot of time and effort to chase the tails of bugs \cite{Kuanfans}.
+
+\tableofcontents
+
+\section{Floating Point Numbers}
+
+
+\begin{enumerate}
+    \item [\textbf{Tiny Numbers}] Check all numbers generated during your code, either key parameters or final results. Pay attention to those numbers that are much below machine epsilon (say $<10^{-18}$) since they would \textcolor{red}{slow} your code or destory the \textcolor{red}{accuracy} of the algorithm.
+\end{enumerate}
+
+
+\section{Numerical Linear Algebra}
+
+
+\begin{enumerate}
+    \item [\textbf{Equivalence}] When solving equations like $(A \backslash B) x = f$ or $(A \backslash B - C) x = f$, a common strategy is to multiply both ends by $A$ to get $Bx = Af$ or $(B - AC)x = Af$ in order to avoid forming the annoying dense matrix $A \backslash B$. There is no problem in theory. In numerical practice, however, you need to pay attention to the condition number of $A$ since multiplication of an ill-conditioned matrix would probably has a bad influence on the \textcolor{red}{accuracy} of your algorithm.
+\end{enumerate}
+
+
+\section{Eigenvalues}
+
+
+\begin{enumerate}
+    \item [\textbf{Complex pairs}] Complex paris may appera in the spectra of a real matrix. Do not simply use \texttt{abs} function on the eigenvalues and eigenvectors before you're sure that no complex numbers would arise.
+\end{enumerate}
+
+
+\bibliographystyle{plain}
+\bibliography{CNE-bib}
+\end{document}
